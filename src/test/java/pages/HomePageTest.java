@@ -43,4 +43,12 @@ class HomePageTest {
         Boolean display = driver.findElement(By.cssSelector("#wpforms-confirmation-77 > p")).isDisplayed();
         assertTrue(display);
     }
+
+    @Test
+    void checkLanguage() throws InterruptedException {
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+        String lang = driver.findElement(By.cssSelector("html")).getAttribute("lang");
+        assertEquals("pl-PL",lang);
+    }
 }

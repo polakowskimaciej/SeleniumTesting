@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,5 +26,12 @@ public class HomePage extends AbstractPage {
         inputFieldEmail.sendKeys("johndoe@xmail.com");
         inputFieldMessage.sendKeys("Sample Message");
         submitButton.submit();
+        //Accessibility - .click() simulates only mouse user behaviour,
+        // to test this for both keyboard and mouse, I used .submit()
+    }
+    public void openHomePage() throws InterruptedException {
+        PageFactory.initElements(driver, HomePage.class);
+        Thread.sleep(2000);
+
     }
 }
