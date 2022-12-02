@@ -32,6 +32,5 @@ public class HomePage extends AbstractPage {
     public void openHomePage() throws InterruptedException {
         PageFactory.initElements(driver, HomePage.class);
         Thread.sleep(2000);
-
     }
 }

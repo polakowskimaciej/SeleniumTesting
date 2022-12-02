@@ -50,5 +50,6 @@ class HomePageTest {
         homePage.openHomePage();
         String lang = driver.findElement(By.cssSelector("html")).getAttribute("lang");
         assertEquals("pl-PL",lang);
+        //setting language correctly is important for screen reader users
     }
 }
