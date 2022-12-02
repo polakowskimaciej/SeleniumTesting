@@ -15,6 +15,7 @@ public class HomePage extends AbstractPage {
     static WebElement inputFieldMessage;
     @FindBy(css = "#wpforms-submit-77")
     static WebElement submitButton;
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -29,8 +30,15 @@ public class HomePage extends AbstractPage {
         //Accessibility - .click() simulates only mouse user behaviour,
         // to test this for both keyboard and mouse, I used .submit()
     }
+
     public void openHomePage() throws InterruptedException {
         PageFactory.initElements(driver, HomePage.class);
         Thread.sleep(2000);
+    }
+
+    public void leaveFormEmptyAndSubmit() throws InterruptedException {
+        PageFactory.initElements(driver, HomePage.class);
+        Thread.sleep(2000);
+        submitButton.submit();
     }
 }
