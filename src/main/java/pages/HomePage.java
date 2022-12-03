@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -15,6 +16,10 @@ public class HomePage extends AbstractPage {
     static WebElement inputFieldMessage;
     @FindBy(css = "#wpforms-submit-77")
     static WebElement submitButton;
+    @FindBy(linkText = "Notka bio")
+    static WebElement bioPageLink;
+    @FindBy(css = "#cn-accept-cookie")
+    static WebElement okCookies;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -49,5 +54,17 @@ public class HomePage extends AbstractPage {
         inputFieldEmail.sendKeys("johndoemail.com");
         inputFieldMessage.sendKeys("Sample Message");
         submitButton.submit();
+    }
+    public void navigateToBioPage() throws InterruptedException {
+        PageFactory.initElements(driver, HomePage.class);
+        Thread.sleep(3000);
+        acceptCookies();
+        new Actions(driver).moveToElement(bioPageLink).scrollToElement(bioPageLink).perform();
+        bioPageLink.click();
+    }
+    public void acceptCookies() throws InterruptedException {
+        PageFactory.initElements(driver, HomePage.class);
+        Thread.sleep(3000);
+        okCookies.click();
     }
 }

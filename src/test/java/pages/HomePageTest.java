@@ -22,6 +22,7 @@ class HomePageTest {
     private PrintStream originalOut = System.out;
     private PrintStream originalErr = System.err;
 
+
     public String ColorVerify(WebElement target) {
         /*method to verify color code*/
         String colorCode = target.getCssValue("color");
@@ -117,13 +118,20 @@ class HomePageTest {
         }
     }
 
-        @Test
-        void checkLanguage () throws InterruptedException {
-            HomePage homePage = new HomePage(driver);
-            homePage.openHomePage();
-            String lang = driver.findElement(By.cssSelector("html")).getAttribute("lang");
-            assertEquals("pl-PL", lang);
-            //setting language correctly is important for screen reader users
-        }
-
+    @Test
+    void checkLanguage() throws InterruptedException {
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+        String lang = driver.findElement(By.cssSelector("html")).getAttribute("lang");
+        assertEquals("pl-PL", lang);
+        //setting language correctly is important for screen reader users
     }
+    @Test
+    void navigateToBioPageTest() throws InterruptedException {
+        HomePage homePage = new HomePage(driver);
+        homePage.navigateToBioPage();
+        String urlExpected = driver.getCurrentUrl();
+        assertEquals("https://dostepnoscarchitektoniczna.pl/o-mnie/", urlExpected);
+        //Test passes with .click() but manual test shows, that using tab pressing enter works as well
+    }
+}
