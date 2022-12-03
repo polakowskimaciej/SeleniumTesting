@@ -77,6 +77,7 @@ class HomePageTest {
                 assertEquals("This field is required.", error.getText());
         }
     }
+
     @Test
     void testEmptyFormErrorTextColor() throws InterruptedException {
         HomePage homePage = new HomePage(driver);
@@ -89,6 +90,7 @@ class HomePageTest {
             assertEquals("#990000", ColorVerify(errorcolor));
         }
     } //does not work yet, detects original color of text instead of red
+
     @Test
     void testEmptyFormErrorBorderColor() throws InterruptedException {
         HomePage homePage = new HomePage(driver);
@@ -102,14 +104,26 @@ class HomePageTest {
         }
     } //does not work yet, detects original color of text instead of red
 
-
     @Test
-    void checkLanguage() throws InterruptedException {
+    void testInvalidEmailText() throws InterruptedException {
         HomePage homePage = new HomePage(driver);
-        homePage.openHomePage();
-        String lang = driver.findElement(By.cssSelector("html")).getAttribute("lang");
-        assertEquals("pl-PL", lang);
-        //setting language correctly is important for screen reader users
+        homePage.submitWithInvalidEmail();
+        Thread.sleep(2000);
+        List<WebElement> errors = driver.findElements(By.className("wpforms-error"));
+        for (WebElement error :
+                errors) {
+            if (error.getText().length() > 1)
+                assertEquals("Please enter a valid email address.", error.getText());
+        }
     }
 
-}
+        @Test
+        void checkLanguage () throws InterruptedException {
+            HomePage homePage = new HomePage(driver);
+            homePage.openHomePage();
+            String lang = driver.findElement(By.cssSelector("html")).getAttribute("lang");
+            assertEquals("pl-PL", lang);
+            //setting language correctly is important for screen reader users
+        }
+
+    }

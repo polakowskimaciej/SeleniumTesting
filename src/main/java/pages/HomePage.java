@@ -41,4 +41,13 @@ public class HomePage extends AbstractPage {
         Thread.sleep(2000);
         submitButton.submit();
     }
+
+    public void submitWithInvalidEmail() throws InterruptedException {
+        PageFactory.initElements(driver, HomePage.class);
+        Thread.sleep(2000);
+        inputFieldName.sendKeys("John Doe");
+        inputFieldEmail.sendKeys("johndoemail.com");
+        inputFieldMessage.sendKeys("Sample Message");
+        submitButton.submit();
+    }
 }
