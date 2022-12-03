@@ -48,6 +48,14 @@ class HomePageTest {
     }
 
     @Test
+    void acceptCookiesTest() throws InterruptedException {
+        HomePage homePage = new HomePage(driver);
+        homePage.acceptCookies();
+        Thread.sleep(2000);
+        Boolean cookiesDisplay = driver.findElement(By.cssSelector("#cookie-notice > div")).isDisplayed();
+        assertFalse(cookiesDisplay);
+    }
+    @Test
     void testFillForm() throws InterruptedException {
         HomePage homePage = new HomePage(driver);
         homePage.fillForm();
