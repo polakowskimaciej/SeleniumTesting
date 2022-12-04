@@ -19,6 +19,10 @@ I used to have a personal website as an accessibility expert. I use it now as a 
 - Does the form fields have alternative text and correct tags?
 - Does return to home page link works?
 - Do the paragraph links guide to correct paragraphs?
+- Does the "details below link" scroll to expected space?
+- Does the footer link work?
+- Is the header structure used correctly?
+- Is the linkedin link on BioPage directing to expected site?
 
 ## New framework to apply
 Apply knowledge from Udemy course Automated Accessibility Testing for React Applications
