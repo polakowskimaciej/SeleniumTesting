@@ -20,6 +20,8 @@ public class HomePage extends AbstractPage {
     static WebElement bioPageLink;
     @FindBy(css = "#cn-accept-cookie")
     static WebElement okCookies;
+    @FindBy(id = "cn-close-notice")
+    static WebElement closeCookies;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -66,5 +68,10 @@ public class HomePage extends AbstractPage {
         PageFactory.initElements(driver, HomePage.class);
         Thread.sleep(3000);
         okCookies.click();
+    }
+    public void declineCookies() throws InterruptedException {
+        PageFactory.initElements(driver, HomePage.class);
+        Thread.sleep(3000);
+        closeCookies.click();
     }
 }
