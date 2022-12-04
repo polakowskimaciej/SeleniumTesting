@@ -8,9 +8,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.Color;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.System.err;
@@ -19,16 +20,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HomePageTest {
     WebDriver driver;
-    private PrintStream originalOut = System.out;
-    private PrintStream originalErr = System.err;
-
+    private final PrintStream originalOut = System.out;
+    private final PrintStream originalErr = System.err;
 
 
     public String ColorVerify(WebElement target) {
         /*method to verify color code*/
         String colorCode = target.getCssValue("color");
-        String hexacolor = Color.fromString(colorCode).asHex();
-        return hexacolor;
+        return Color.fromString(colorCode).asHex();
     }
 
     @BeforeEach
@@ -41,8 +40,7 @@ class HomePageTest {
     }
 
     @AfterEach
-    void tearDown() throws InterruptedException {
-        Thread.sleep(2000);
+    void tearDown() {
         System.setErr(originalOut);
         System.setErr(originalErr);
         driver.quit();
@@ -53,23 +51,25 @@ class HomePageTest {
         HomePage homePage = new HomePage(driver);
         homePage.acceptCookies();
         Thread.sleep(2000);
-        Boolean cookiesDisplay = driver.findElement(By.cssSelector("#cookie-notice > div")).isDisplayed();
+        boolean cookiesDisplay = driver.findElement(By.cssSelector("#cookie-notice > div")).isDisplayed();
         assertFalse(cookiesDisplay);
     }
+
     @Test
     void declineCookiesTest() throws InterruptedException {
         HomePage homePage = new HomePage(driver);
         homePage.declineCookies();
         Thread.sleep(2000);
-        Boolean cookiesDisplay = driver.findElement(By.cssSelector("#cookie-notice > div")).isDisplayed();
+        boolean cookiesDisplay = driver.findElement(By.cssSelector("#cookie-notice > div")).isDisplayed();
         assertFalse(cookiesDisplay);
     }
+
     @Test
     void testFillForm() throws InterruptedException {
         HomePage homePage = new HomePage(driver);
         homePage.fillForm();
         Thread.sleep(2000);
-        Boolean display = driver.findElement(By.cssSelector("#wpforms-confirmation-77 > p")).isDisplayed();
+        boolean display = driver.findElement(By.cssSelector("#wpforms-confirmation-77 > p")).isDisplayed();
         assertTrue(display);
     }
 
@@ -104,8 +104,9 @@ class HomePageTest {
         List<WebElement> errors = driver.findElements(By.className("wpforms-error"));
         for (WebElement errorcolor :
                 errors) {
-            if (errorcolor.getText().length() > 1) ;
-            assertEquals("#990000", ColorVerify(errorcolor));
+            if (errorcolor.getText().length() > 1) {
+                assertEquals("#990000", ColorVerify(errorcolor));
+            }
         }
     } //does not work yet, detects original color of text instead of red
 
@@ -117,8 +118,9 @@ class HomePageTest {
         List<WebElement> errors = driver.findElements(By.className("wpforms-error"));
         for (WebElement errorcolor :
                 errors) {
-            if (errorcolor.getText().length() < 1) ;
-            assertEquals("rgb(153 0 0)", ColorVerify(errorcolor));
+            if (errorcolor.getText().length() < 1) {
+                assertEquals("rgb(153 0 0)", ColorVerify(errorcolor));
+            }
         }
     } //does not work yet, detects original color of text instead of red
 
@@ -143,6 +145,7 @@ class HomePageTest {
         assertEquals("pl-PL", lang);
         //setting language correctly is important for screen reader users
     }
+
     @Test
     void navigateToBioPageTest() throws InterruptedException {
         HomePage homePage = new HomePage(driver);

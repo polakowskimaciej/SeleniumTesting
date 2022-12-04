@@ -1,21 +1,19 @@
 # Automated Website tests
 
-I used to have a personal website as an accessibility expert. I use it know as a study case for automated tests in Selenium.
+I used to have a personal website as an accessibility expert. I use it now as a study case for automated tests in Selenium.
 
 ## Test cases 
 ### Already written
 - Is contact form working properly?
 - Is home page language set to polish?
 - Is bio page language set to polish?
+- Is cookie panel closing when ok or X is submitted?
+- Is Bio note linking to correct page?
 
 ### In progress
 - Is UI communicating properly, when incorrect data is submitted in contact form?
 
 ### To write (more will be added)
-
-
-- Is Bio note linking to correct page?
-- Is cookie panel closing when ok or X is submitted?
 - Is write to me link guiding to contact form?
 - Does the picture have alternative text?
 - Does the form fields have alternative text and correct tags?
