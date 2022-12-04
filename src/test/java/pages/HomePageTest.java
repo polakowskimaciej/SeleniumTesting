@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.System.err;
@@ -153,5 +154,17 @@ class HomePageTest {
         String urlExpected = driver.getCurrentUrl();
         assertEquals("https://dostepnoscarchitektoniczna.pl/o-mnie/", urlExpected);
         //Test passes with .click() but manual test shows, that using tab pressing enter works as well
+    }
+
+    @Test
+    void testAltText() throws InterruptedException {
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+        WebElement img = driver.findElement(By.tagName("img"));
+        String altText = img.getAttribute("alt");
+        altText.trim();
+        System.out.println(altText);
+        assertFalse(altText.isEmpty());
+        //fails because alt text for the only image on the site is actually empty
     }
 }
