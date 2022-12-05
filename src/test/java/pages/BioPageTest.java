@@ -28,8 +28,7 @@ class BioPageTest {
     }
 
     @AfterEach
-    void tearDown() throws InterruptedException {
-        Thread.sleep(2000);
+    void tearDown() {
         System.setErr(originalOut);
         System.setErr(originalErr);
         driver.quit();
@@ -42,5 +41,29 @@ class BioPageTest {
         String lang = driver.findElement(By.cssSelector("html")).getAttribute("lang");
         assertEquals("pl-PL",lang);
         //setting language correctly is important for screen reader users
+    }
+    @Test
+    void returnToHomePageTest() throws InterruptedException {
+        BioPage bioPage = new BioPage(driver);
+        bioPage.returnToHomePage();
+        String urlExpected = driver.getCurrentUrl();
+        assertEquals("https://dostepnoscarchitektoniczna.pl/", urlExpected);
+    }
+    @Test
+    void acceptCookiesTest() throws InterruptedException {
+        BioPage bioPage = new BioPage(driver);
+        bioPage.acceptCookies();
+        Thread.sleep(2000);
+        boolean cookiesDisplay = driver.findElement(By.cssSelector("#cookie-notice > div")).isDisplayed();
+        assertFalse(cookiesDisplay);
+    }
+
+    @Test
+    void declineCookiesTest() throws InterruptedException {
+        BioPage bioPage = new BioPage(driver);
+        bioPage.declineCookies();
+        Thread.sleep(2000);
+        boolean cookiesDisplay = driver.findElement(By.cssSelector("#cookie-notice > div")).isDisplayed();
+        assertFalse(cookiesDisplay);
     }
 }
